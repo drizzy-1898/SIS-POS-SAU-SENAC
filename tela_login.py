@@ -1,12 +1,13 @@
-import tkinter as tk
 from tkinter import messagebox
-from cadastro_funcionario import CadastroFuncionario
+import customtkinter  as ctk
+
 
 
 class SistemaLogin:
     def __init__(self, janela):
         self.janela = janela
-        self.janela.title("Sistema de Posto de Saúde")
+        self.janela.title("Login")
+        self.janela.geometry("400x400")
 
         # Simulação de banco de dados de usuários (credenciais armazenadas como dicionário)
         self.usuarios = {
@@ -22,21 +23,23 @@ class SistemaLogin:
         # Limpar a janela atual para trocar de interface
         for widget in self.janela.winfo_children():
             widget.destroy()
-
+        
         # Interface de Login
-        label_usuario = tk.Label(self.janela, text="Usuário:")
+        
+        
+        label_usuario = ctk.CTkLabel(self.janela, text="Usuário:")
         label_usuario.grid(row=0, column=0, padx=10, pady=10)
 
-        self.entry_usuario = tk.Entry(self.janela)
+        self.entry_usuario = ctk.CTkEntry(self.janela, placeholder_text="Digite seu ID")
         self.entry_usuario.grid(row=0, column=1, padx=10, pady=10)
 
-        label_senha = tk.Label(self.janela, text="Senha:")
+        label_senha = ctk.CTkLabel(self.janela, text="Senha:")
         label_senha.grid(row=1, column=0, padx=10, pady=10)
 
-        self.entry_senha = tk.Entry(self.janela, show="*")
+        self.entry_senha = ctk.CTkEntry(self.janela, show="*", placeholder_text="Digite sua senha")
         self.entry_senha.grid(row=1, column=1, padx=10, pady=10)
 
-        btn_login = tk.Button(self.janela, text="Login", command=self.verificar_login)
+        btn_login = ctk.CTkButton(self.janela, text="Login", command=self.verificar_login)
         btn_login.grid(row=2, column=1, padx=10, pady=10)
 
     def verificar_login(self):
@@ -49,45 +52,18 @@ class SistemaLogin:
         else:
             messagebox.showerror("Erro", "Usuário ou senha incorretos")
 
-    def abrir_painel(self, cargo):
-        if cargo == "Administrador":
-            messagebox.showinfo("Login bem-sucedido", "Bem-vindo, Administrador!")
-            self.abrir_interface_administrador()
-        elif cargo == "Médico":
-            messagebox.showinfo("Login bem-sucedido", "Bem-vindo, Médico!")
-        elif cargo == "Recepcionista":
-            messagebox.showinfo("Login bem-sucedido", "Bem-vindo, Recepcionista!")
-        else:
-            messagebox.showerror("Erro", "Cargo não reconhecido")
-
-    def abrir_interface_administrador(self):
-        # Limpar a janela para a interface de administrador
-        for widget in self.janela.winfo_children():
-            widget.destroy()
-
-        label_adm = tk.Label(self.janela, text="Administrador - Ações Disponíveis")
-        label_adm.grid(row=0, column=0, padx=10, pady=10)
-
-        btn_cadastrar_funcionario = tk.Button(self.janela, text="Cadastrar Funcionário", command=self.abrir_cadastro_funcionario)
-        btn_cadastrar_funcionario.grid(row=1, column=0, padx=10, pady=10)
-
-        btn_logout = tk.Button(self.janela, text="Logout", command=self.criar_interface_login)
-        btn_logout.grid(row=2, column=0, padx=10, pady=10)
     
-    def abrir_interface_administrador(self):
-        # Limpar a janela para a interface de administrador
-        for widget in self.janela.winfo_children():
-            widget.destroy()
+    def abrir_painel_admin(self):
+        messagebox.showinfo("Login bem-sucedido", "Bem-vindo, Administrador!")
+        # Adicionar aqui os elementos da interface para administradores
 
-        label_adm = tk.Label(self.janela, text="Administrador - Ações Disponíveis")
-        label_adm.grid(row=0, column=0, padx=10, pady=10)
+    def abrir_painel_medico(self):
+        messagebox.showinfo("Login bem-sucedido", "Bem-vindo, Médico!")
+        # Adicionar aqui os elementos da interface para médicos
 
-        btn_cadastrar_funcionario = tk.Button(self.janela, text="Cadastrar Funcionário", command=self.abrir_cadastro_funcionario)
-        btn_cadastrar_funcionario.grid(row=1, column=0, padx=10, pady=10)
+    def abrir_painel_recepcionista(self):
+        messagebox.showinfo("Login bem-sucedido", "Bem-vindo, Recepcionista!")
+        # Adicionar aqui os elementos da interface para recepcionistas
 
-        btn_logout = tk.Button(self.janela, text="Logout", command=self.criar_interface_login)
-        btn_logout.grid(row=2, column=0, padx=10, pady=10)
-
-    def abrir_cadastro_funcionario(self):
-        CadastroFuncionario(self.janela, self.usuarios, self.abrir_interface_administrador)
+    
     

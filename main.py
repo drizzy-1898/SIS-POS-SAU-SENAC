@@ -1,8 +1,11 @@
 from tela_login import SistemaLogin
 import tkinter as tk
+import customtkinter as ctk
 
 def main():
-    janela = tk.Tk()
+    ctk.set_appearance_mode("dark")
+    
+    janela = ctk.CTk()
     app = SistemaLogin(janela)
     janela.mainloop()
 
