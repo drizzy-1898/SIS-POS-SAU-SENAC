@@ -24,35 +24,35 @@ class SistemaLogin:
             widget.destroy()
 
         # Criar um frame para centralizar a interface
-        frame = ctk.CTkFrame(self.janela)
-        frame.place(relx=0.5, rely=0.5, anchor='center', relwidth=0.8, relheight=0.8) # Centraliza o frame na janela
+        self.frame = ctk.CTkFrame(self.janela, fg_color="#FFFFFF")
+        self.frame.place(relx=0.5, rely=0.5, anchor='center', relwidth=0.8, relheight=0.8)  # Centraliza o frame na janela
 
-        # Adicionar a logo
-        self.logo = Image.open("C:/Users/arroz/Desktop/file.png")  # Corrigido o caminho
-        self.logo = self.logo.resize((150, 150), Image.LANCZOS)  # Use Image.LANCZOS para redimensionar
+        # Configurar a única coluna que centralizará os widgets
+        self.frame.grid_columnconfigure(0, weight=1)
 
-        self.logo_image = ImageTk.PhotoImage(self.logo)
+        # Carregar e redimensionar a imagem
+        self.logo = Image.open("D:/Users/Aluno/Documents/SIS-POS-SAU/file.png")
+        self.logo = self.logo.resize((150, 150), Image.LANCZOS)
 
-        #Label Imagem
-        label_logo = ctk.CTkLabel(frame, image=self.logo_image)
-        label_logo.grid(row=0, column=0, columnspan=2, pady=(0, 10))  
+        # Convertê-la para um CTkImage
+        self.logo_image = ctk.CTkImage(self.logo, size=(150, 150))
 
-        # Interface de Login
-        label_usuario = ctk.CTkLabel(frame, text="Usuário:")
-        label_usuario.grid(row=1, column=0, padx=10, pady=10, sticky="e")
+        # Criar o label com a imagem
+        self.label_logo = ctk.CTkLabel(self.frame, image=self.logo_image, text="")
+        self.label_logo.grid(row=0, column=0, pady=(0, 10), sticky="n")  # Centralizado
 
-        self.entry_usuario = ctk.CTkEntry(frame, placeholder_text="Digite seu ID", width=200)
-        self.entry_usuario.grid(row=1, column=1, padx=10, pady=10)
+        # Entry para o usuário
+        self.entry_usuario = ctk.CTkEntry(self.frame, placeholder_text="Usuário", width=200)
+        self.entry_usuario.grid(row=1, column=0, padx=10, pady=10)
 
-        label_senha = ctk.CTkLabel(frame, text="Senha:")
-        label_senha.grid(row=2, column=0, padx=10, pady=10, sticky="e")
+        # Entry para a senha
+        self.entry_senha = ctk.CTkEntry(self.frame, show="*", placeholder_text="Senha", width=200)
+        self.entry_senha.grid(row=2, column=0, padx=10, pady=10)
+        
+        self.btn_login = ctk.CTkButton(self.frame, text="Login", command=self.verificar_login, width=200)
+        self.btn_login.grid(row=3, column=0, padx=10, pady=10)
 
-        self.entry_senha = ctk.CTkEntry(frame, show="*", placeholder_text="Digite sua senha", width=200)
-        self.entry_senha.grid(row=2, column=1, padx=10, pady=10)
-
-        btn_login = ctk.CTkButton(frame, text="Login", command=self.verificar_login)
-        btn_login.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky="e")
-
+    
     def verificar_login(self):
         usuario = self.entry_usuario.get()
         senha = self.entry_senha.get()
