@@ -3,7 +3,7 @@ import tkinter as tk
 import customtkinter as ctk
 
 def main():
-    ctk.set_appearance_mode("dark")
+    ctk.set_appearance_mode("light")
     
     janela = ctk.CTk()
     app = SistemaLogin(janela)

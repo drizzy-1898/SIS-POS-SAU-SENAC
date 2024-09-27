@@ -25,17 +25,17 @@ class SistemaLogin:
 
         # Criar um frame para centralizar a interface
         frame = ctk.CTkFrame(self.janela)
-        frame.place(relx=0.5, rely=0.5, anchor='center')  # Centraliza o frame na janela
+        frame.place(relx=0.5, rely=0.5, anchor='center', relwidth=0.8, relheight=0.8) # Centraliza o frame na janela
 
         # Adicionar a logo
-        self.logo = Image.open("C:/Users/Clean Vision/Downloads/file.png")  # Corrigido o caminho
-        self.logo = self.logo.resize((200, 200), Image.LANCZOS)  # Use Image.LANCZOS para redimensionar
+        self.logo = Image.open("C:/Users/arroz/Desktop/file.png")  # Corrigido o caminho
+        self.logo = self.logo.resize((150, 150), Image.LANCZOS)  # Use Image.LANCZOS para redimensionar
 
-        # Converter a imagem para CTkImage
         self.logo_image = ImageTk.PhotoImage(self.logo)
 
+        #Label Imagem
         label_logo = ctk.CTkLabel(frame, image=self.logo_image)
-        label_logo.grid(row=0, column=0, columnspan=2, pady=(0, 10))  # Coloca a logo na primeira linha
+        label_logo.grid(row=0, column=0, columnspan=2, pady=(0, 10))  
 
         # Interface de Login
         label_usuario = ctk.CTkLabel(frame, text="Usuário:")
@@ -51,7 +51,7 @@ class SistemaLogin:
         self.entry_senha.grid(row=2, column=1, padx=10, pady=10)
 
         btn_login = ctk.CTkButton(frame, text="Login", command=self.verificar_login)
-        btn_login.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+        btn_login.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky="e")
 
     def verificar_login(self):
         usuario = self.entry_usuario.get()
