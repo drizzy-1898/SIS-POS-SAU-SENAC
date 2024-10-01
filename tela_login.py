@@ -6,12 +6,11 @@ class SistemaLogin:
     def __init__(self, janela):
         self.janela = janela
         self.janela.title("Login")
-        self.janela.geometry("400x400")
         
         # Constantes
-        self.logo_path = "C:/Users/arroz/Desktop/file.png"
-        self.user_icon_path = "C:/Users/arroz/Documents/PROGRAMAÇÃO/user.png"
-        self.password_icon_path = "C:/Users/arroz/Documents/PROGRAMAÇÃO/lock.png"
+        self.logo_path = "D:/Users/Aluno/Documents/SIS-POS-SAU/file.png"
+        self.user_icon_path = "D:/Users/Aluno/Documents/SIS-POS-SAU/user_login.png"
+        self.password_icon_path = "D:/Users/Aluno/Documents/SIS-POS-SAU/password_login.png"
 
         # Simulação de banco de dados de usuários
         self.usuarios = {
@@ -33,7 +32,7 @@ class SistemaLogin:
         
         # Frame centralizado
         self.frame = ctk.CTkFrame(self.janela, border_width=3, border_color="#00CED1", fg_color="#FFFFFF")
-        self.frame.place(relx=0.5, rely=0.5, anchor='center', relwidth=0.3, relheight=0.7)
+        self.frame.place(relx=0.5, rely=0.5, anchor='center', relwidth=0.2, relheight=0.5)
 
         self.frame.grid_columnconfigure(0, weight=1)
         self.frame.grid_columnconfigure(1, weight=1)
@@ -54,19 +53,27 @@ class SistemaLogin:
             return ctk.CTkImage(imagem, size=tamanho)
         return ImageTk.PhotoImage(imagem)
 
+
+    def retornar_label(self, label_info, linha):
+        return self.criar_label(label_info, linha)
+    
+    def retornar_entry(self, icone, linha, placeholder_inf, show):
+        return self.criar_entry(icone, linha, placeholder_inf, show)
+
+
     def criar_widgets_login(self):
         """Cria os widgets para a interface de login."""
         # Logo
         self.label_logo = ctk.CTkLabel(self.frame, image=self.logo_image, text="")
         self.label_logo.grid(row=0, column=0, columnspan=2, pady=(10, 5), sticky="n")
 
-        # Campo Usuário
-        self.criar_label("Usuário", 1)
-        self.criar_entry(self.icon_user, 2, "Digite seu usuário", show=False)
+        #Campo Usuário
+        self.retornar_label("Usuario", 1)
+        self.retornar_entry(self.icon_user, 2, "Digite seu usuário", show=False)
 
         # Campo Senha
-        self.criar_label("Senha", 3)
-        self.criar_entry(self.icon_password, 4, "Digite sua senha", show=True)
+        self.retornar_label("Senha", 3)
+        self.retornar_entry(self.icon_password, 4, "Digite sua senha", show=True)
 
         # Botão de Login
         self.btn_login = ctk.CTkButton(self.frame, text="Login", command=self.verificar_login, width=200, font=("Arial", 14, "bold"))
